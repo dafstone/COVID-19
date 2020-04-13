@@ -8,6 +8,10 @@ arg = ARGV[0]
 
 html_files = Dir.glob('visuals/*/**.html')
 
+def json_files
+  return Dir.glob('visuals/*/**.json')
+end
+
 
 def hash_from_plotly_html_file_path(file_path)
   file = open(file_path)
@@ -33,8 +37,12 @@ def process_all_plotly_html(html_files)
   end
 end
 
-if arg == "process_plotlys"
+case arg
+when "process_plotlys"
+  p "Processing Plotly to JSON"
   process_all_plotly_html(html_files)
+when "pry"
+  Binding.pry
 else
   p "No valid argument (try process_plotlys)"
 end
